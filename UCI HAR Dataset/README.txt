@@ -32,29 +32,30 @@ The dataset includes the following files:
 
 - 'features.txt': List of all features.
 
-- 'activity_labels.txt': Links the class labels with their activity name.
+- activities = 'activity_labels.txt: Links the class labels with their activity name.
 
-- 'train/X_train.txt': Training set.
+- x_train ='train/X_train.txt': Training set.
 
-- 'train/y_train.txt': Training labels.
+- y_train = 'train/y_train.txt': Training labels.
 
-- 'test/X_test.txt': Test set.
+- x_test = 'test/X_test.txt': Test set.
 
-- 'test/y_test.txt': Test labels.
+- y_test = 'test/y_test.txt': Test labels.
+
+- train_data = merges x and y train data, a column called "train_group" is added
+
+- test_data = merges x and y test data, a column called "test_group" is added
+
+- combined_data = binds the rows from train_data and test_data together, variable names are changed to be more specific, and the levels of activity are changed to descriptive strings  
+
+- tidy_data1 = extracts the mean and standar deviations from combined_data, meanFreq is omitted 
+
+-tidy_data2 = groups the data from tidy_data1 by subject and activity and finds the mean for each participant 
 
 - 'Coursera_Data_Cleaning_Project.rproj': R project file. 
 
 - 'run_analysis.R': R script containing the code 
 
-The following files are available for the train and test data. Their descriptions are equivalent. 
-
-- 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
-
-- 'train/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone accelerometer X axis in standard gravity units 'g'. Every row shows a 128 element vector. The same description applies for the 'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z axis. 
-
-- 'train/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by subtracting the gravity from the total acceleration. 
-
-- 'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second. 
 
 Notes: 
 ======

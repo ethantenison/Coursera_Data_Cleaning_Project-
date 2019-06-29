@@ -48,13 +48,15 @@ combined_data <- bind_rows(test_data, train_data, .id = NULL)
 combined_data <- combined_data %>% rename_at(vars(contains("Acc")), 
                                              funs(str_replace(., "Acc", "_Accelerometer_")))
 combined_data <- combined_data %>% rename_at(vars(contains("Jerk")), 
-                                             funs(str_replace(., "jerk", "Jerk_signals_")))
+                                             funs(str_replace(., "Jerk", "Jerk_signals_")))
 combined_data <- combined_data %>% rename_at(vars(contains("Gyro")), 
                                              funs(str_replace(., "Gyro", "_Gyroscope_")))
 combined_data <- combined_data %>% rename_at(vars(contains("Mag")), 
                                              funs(str_replace(., "Mag", "Magnitude_")))
 combined_data <- combined_data %>% rename_at(vars(starts_with("f")), 
                                              funs(str_replace(., "f", "fourier_")))
+combined_data <- combined_data %>% rename_at(vars(starts_with("t")), 
+                                             funs(str_replace(., "t", "time_")))
 combined_data <- combined_data %>% rename_at(vars(ends_with("X")), 
                                              funs(str_replace(., "X", "XAxis")))
 combined_data <- combined_data %>% rename_at(vars(ends_with("Y")), 
@@ -71,8 +73,8 @@ combined_data$activity = as.factor(as.character(combined_data$activity))
 levels(combined_data$activity) <- c("walking","walking_upstairs","walking_downstairs","sitting","standing","laying")
 
 #extract the mean and standard deviation and save them into a new data set , here I took out meanFreq because it's a weighted average and gives inaccurate results. 
-means_stds <- select(combined_data, set_of_participants, subject, activity, matches("mean"), matches("std"), -(matches("meanFreq")))
+tidy_data1 <- select(combined_data, set_of_participants, subject, activity, matches("mean"), matches("std"), -(matches("meanFreq")))
 
 #Create new tidy data set
-summary <- means_stds[,2:50] %>% group_by(subject, activity) %>% summarize_all(funs(mean))
+tidy_data2 <- tidy_data1[,2:50] %>% group_by(subject, activity) %>% summarize_all(funs(mean))
 
